@@ -1,0 +1,14 @@
+.App-task {
+  border: 2px solid rgb(19, 202, 34);
+  display: flex;
+  align-items: center;
+}
+
+.App-task-edit {
+  flex: 1;
+}
+
+.App-task-edit input {
+  width: 80%;
+  padding: .5rem;
+}

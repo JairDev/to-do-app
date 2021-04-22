@@ -1,0 +1,8 @@
+.App-todo {
+  /* width: 60%; */
+}
+
+.App-todo-list {
+  border: 2px solid rgb(255, 22, 22);
+  padding: 1rem;
+}
