@@ -1,43 +1,64 @@
 import React, { useRef, useState } from "react";
+import { useLocalStorage } from "../../App";
 import "./Task.css";
 
+let edit = false;
 
-let edit = false
-
-const Task = ({ objTask }) => {
-  console.log(objTask);
+const Task = ({
+  objTask,
+  handleClickFavorite,
+  handleClickDelete,
+  handleClickSave,
+  handleClickComplete,
+}) => {
+  // console.log(objTask);
   const [editTask, setEditTask] = useState("");
-  const inputRef = useRef(null)
-  
+  const inputRef = useRef(null);
+  // const [task, setTask] = useLocalStorage()
+  // console.log(edit)
   const handleChange = (e) => {
-    setEditTask(e.target.value)
-  }
+    setEditTask(e.target.value);
+  };
 
   const handleClickEdit = (e) => {
-    edit = true
-    const input = inputRef.current 
-    input.removeAttribute("readonly")
-    e.preventDefault()
-  }
+    edit = true;
+    const input = inputRef.current;
+    input.removeAttribute("readonly");
+    e.preventDefault();
+  };
 
-  const handleClickSave = (e) => {
-    edit = false
-    const input = inputRef.current 
-    input.readOnly ? input.removeAttribute("readonly") : input.readOnly = true 
-    const objTaskEdit = {...objTask, text: editTask}
-    console.log(objTaskEdit)
-    console.log("helpo")
-    e.preventDefault()
-  }
+  // const handleClickSave = (e) => {
+  //   edit = false;
+  //   const input = inputRef.current;
+  //   const id = e.target.dataset.taskid
+  //   input.readOnly
+  //     ? input.removeAttribute("readonly")
+  //     : (input.readOnly = true);
+  //   // const index = task.findIndex(task => task.id === id)
+  //   // console.log(index)
+  //   const objTaskEdit = { ...objTask, text: editTask };
+  //   // console.log(objTaskEdit);
+  //   // const newArrTask = task.filter(task => task.id === id)
+  //   // console.log([...newArrTask, objTaskEdit])
+  //   // console.log(newArrTask)
+  //   // console.log("task", task)
+  //   // setTask([...task, objTaskEdit])
+  //   console.log(id)
+  //   e.preventDefault();
+  // };
   const handleSubmit = (e) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   return (
     <div className="App-task">
       <div className="App-check-completed">
         <form>
-          <input type="checkbox" />
+          <input
+            data-taskid={objTask.id}
+            onClick={(e) => handleClickComplete(e, objTask)}
+            type="checkbox"
+          />
         </form>
       </div>
       <div className="App-task-edit">
@@ -46,13 +67,21 @@ const Task = ({ objTask }) => {
             id="input-task-edit"
             type="text"
             name="task-edit"
-            value={edit ? editTask : objTask.text} 
+            value={edit ? editTask : objTask.text}
             onChange={handleChange}
             readOnly="readonly"
             ref={inputRef}
           />
         </form>
       </div>
+
+      <div className="content-icon-favorite">
+        <span
+          onClick={(e) => handleClickFavorite(e, objTask)}
+          className="icon-favorite"
+        ></span>
+      </div>
+
       <div>
         <form>
           <button onClick={handleClickEdit}>Editar</button>
@@ -60,8 +89,17 @@ const Task = ({ objTask }) => {
       </div>
       <div>
         <form>
-          <button onClick={handleClickSave}>Guardar</button>
+          <button
+            data-taskid={objTask.id}
+            onClick={(e) => handleClickSave(e, edit, inputRef, editTask)}
+          >
+            Guardar
+          </button>
         </form>
+      </div>
+
+      <div className="content-icon-delete">
+        <span onClick={handleClickDelete} className="icon-delete"></span>
       </div>
     </div>
   );
