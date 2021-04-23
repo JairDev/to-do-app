@@ -1,6 +1,6 @@
 ### Aplicacion Todo-List
 
-## Puedes verlo en vivo, [aquí](https://tastypie.netlify.app/).
+## Puedes verlo en vivo, [aquí](https://todo-list-app-300dev.netlify.app/).
 
 #### Getting Started
 * Clone this project
