@@ -1,0 +1,8 @@
+.App-content-filter {
+  /* border: 2px solid red; */
+  cursor: pointer;
+  position: relative;
+  margin-top: .5rem;
+  z-index: 5;
+
+}

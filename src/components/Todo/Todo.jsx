@@ -7,8 +7,10 @@ const Todo = ({
   handleClickFavorite,
   handleClickDelete,
   handleClickSave,
-  handleClickComplete
+  handleClickComplete,
+  handleClickEdit
 }) => {
+  // if(!taskList.length) return <div className="empty-task">Sin tareas</div>
   return (
     <section className="App-todo-list">
       {taskList.map((task) => (
@@ -19,6 +21,7 @@ const Todo = ({
           handleClickDelete={handleClickDelete}
           handleClickSave={handleClickSave}
           handleClickComplete={handleClickComplete}
+          handleClickEdit={handleClickEdit}
         />
       ))}
     </section>

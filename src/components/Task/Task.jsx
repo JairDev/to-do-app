@@ -1,8 +1,5 @@
-import React, { useRef, useState } from "react";
-import { useLocalStorage } from "../../App";
+import React, { useEffect, useRef, useState } from "react";
 import "./Task.css";
-
-let edit = false;
 
 const Task = ({
   objTask,
@@ -10,51 +7,61 @@ const Task = ({
   handleClickDelete,
   handleClickSave,
   handleClickComplete,
+  handleClickEdit,
 }) => {
-  // console.log(objTask);
+  const favoriteIconRef = useRef(null);
+  const spanCompletedStyle = useRef(null);
+  const isCheckedStyle = useRef(null);
+  const refTask = useRef(null);
   const [editTask, setEditTask] = useState("");
   const inputRef = useRef(null);
-  // const [task, setTask] = useLocalStorage()
-  // console.log(edit)
+
+  useEffect(() => {
+    const svg = favoriteIconRef.current;
+    const span = spanCompletedStyle.current;
+    const task = refTask.current;
+    let check = isCheckedStyle.current;
+
+    objTask.favorite
+      ? svg.classList.add("selected")
+      : svg.classList.remove("selected");
+
+    objTask.completed
+      ? span.classList.add("line-completed")
+      : span.classList.remove("line-completed");
+
+    objTask.completed ? (check.checked = true) : (check.checked = false);
+
+    objTask.favorite && objTask.selected
+      ? task.classList.add("selected-favorite")
+      : task.classList.remove("selected-favorite");
+
+    objTask.completed && objTask.selected
+      ? task.classList.add("selected-completed")
+      : task.classList.remove("selected-completed");
+
+    !objTask.completed && objTask.selected
+      ? task.classList.add("selected-not-completed")
+      : task.classList.remove("selected-not-completed");
+  }, [objTask.completed, objTask.favorite, objTask.selected]);
+
   const handleChange = (e) => {
     setEditTask(e.target.value);
   };
 
-  const handleClickEdit = (e) => {
-    edit = true;
-    const input = inputRef.current;
-    input.removeAttribute("readonly");
-    e.preventDefault();
-  };
-
-  // const handleClickSave = (e) => {
-  //   edit = false;
-  //   const input = inputRef.current;
-  //   const id = e.target.dataset.taskid
-  //   input.readOnly
-  //     ? input.removeAttribute("readonly")
-  //     : (input.readOnly = true);
-  //   // const index = task.findIndex(task => task.id === id)
-  //   // console.log(index)
-  //   const objTaskEdit = { ...objTask, text: editTask };
-  //   // console.log(objTaskEdit);
-  //   // const newArrTask = task.filter(task => task.id === id)
-  //   // console.log([...newArrTask, objTaskEdit])
-  //   // console.log(newArrTask)
-  //   // console.log("task", task)
-  //   // setTask([...task, objTaskEdit])
-  //   console.log(id)
-  //   e.preventDefault();
-  // };
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
   return (
-    <div className="App-task">
+    <div ref={refTask} className="App-task">
+      <span className="date-task">{objTask.date}</span>
+      <span ref={spanCompletedStyle} className="style-completed"></span>
       <div className="App-check-completed">
         <form>
           <input
+            id="input-check"
+            ref={isCheckedStyle}
             data-taskid={objTask.id}
             onClick={(e) => handleClickComplete(e, objTask)}
             type="checkbox"
@@ -67,7 +74,7 @@ const Task = ({
             id="input-task-edit"
             type="text"
             name="task-edit"
-            value={edit ? editTask : objTask.text}
+            value={objTask.edit ? editTask : objTask.text}
             onChange={handleChange}
             readOnly="readonly"
             ref={inputRef}
@@ -75,31 +82,46 @@ const Task = ({
         </form>
       </div>
 
-      <div className="content-icon-favorite">
+      <div className="content-icon-favorite action-task">
         <span
           onClick={(e) => handleClickFavorite(e, objTask)}
           className="icon-favorite"
-        ></span>
+        >
+          <svg ref={favoriteIconRef} className="icon icon-star-empty">
+            <use xlinkHref="#icon-star-empty"></use>
+          </svg>
+        </span>
       </div>
 
-      <div>
+      <div className="content-editar action-task">
         <form>
-          <button onClick={handleClickEdit}>Editar</button>
+          <button onClick={(e) => handleClickEdit(e, objTask, editTask)}>
+            {objTask.edit ? "Guardar" : "Editar"}
+          </button>
         </form>
       </div>
-      <div>
+
+      <div className="content-guardar action-task">
         <form>
           <button
             data-taskid={objTask.id}
-            onClick={(e) => handleClickSave(e, edit, inputRef, editTask)}
+            onClick={(e) => handleClickSave(e, editTask, objTask)}
           >
             Guardar
           </button>
         </form>
       </div>
 
-      <div className="content-icon-delete">
-        <span onClick={handleClickDelete} className="icon-delete"></span>
+      <div className="content-icon-delete action-task">
+        <span
+          data-taskid={objTask.id}
+          onClick={handleClickDelete}
+          className="icon-delete"
+        >
+          <svg className="icon icon-bin">
+            <use xlinkHref="#icon-bin"></use>
+          </svg>
+        </span>
       </div>
     </div>
   );

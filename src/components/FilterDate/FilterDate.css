@@ -1,0 +1,13 @@
+.App-content-filter-date {
+  margin-top: 2rem;
+}
+
+.App-content-filter-date form {
+  display: flex;
+  flex-direction: column;
+}
+
+.App-content-filter-date input {
+  padding: .5rem 0;
+  margin-top: .5rem;
+}

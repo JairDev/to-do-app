@@ -1,10 +1,11 @@
 import React from "react"
+import "./FilterTask.css"
 
-const FilterTask = () => {
+const FilterTask = ({handleFilterTask}) => {  
   return (
-    <div>
+    <div className="App-content-filter">
       <form>
-        <input id="filter-check" type="checkbox"/>
+        <input onChange={handleFilterTask} id="filter-check" type="checkbox"/>
         <label htmlFor="filter-check">Favoritos</label>
       </form>
     </div>
