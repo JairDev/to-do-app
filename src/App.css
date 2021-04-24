@@ -8,7 +8,6 @@ a {
   text-decoration: none;
 }
 .App {
-  border: 2px solid red;
   min-height: 100vh;
 }
 
@@ -27,8 +26,13 @@ a {
 }
 
 .App-content-title-app {
+  /* border: 2px solid red; */
+  background-color: rgb(131, 131, 192);
+  color: rgb(245, 245, 245);
   display: flex;
   justify-content: center;
+  padding: 1rem;
+  margin-bottom: 2rem;
 }
 
 .App-header {

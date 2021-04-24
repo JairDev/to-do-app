@@ -1,22 +1,18 @@
-import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-// import Home, { useSaveFavorite, useSaveTask } from "./pages/Home/Home";
 import Favorite from "./components/Favorite/Favorite";
-import FilterTask from "./components/FilterTask/FilterTask";
-import Todo from "./components/Todo/Todo";
-import { useRef, useState } from "react";
-import FilterDate from "./components/FilterDate/FilterDate";
 import { useSaveData } from "./hooks/useSaveData/useSaveData";
+import Home from "./pages/Home/Home";
+import "./App.css";
 
 function App() {
   const [task, setTask] = useSaveData("task");
   const [allTask, setAllTask] = useSaveData("alltask");
   const [favorite, setFavorite] = useSaveData("favorite");
-  const refInput = useRef(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, refInput) => {
     const date = new Date();
     const taskText = refInput.current.value;
+
     const taskObject = {
       id: taskText,
       text: taskText,
@@ -30,6 +26,7 @@ function App() {
     setAllTask(arrTask);
     setTask(arrTask);
     refInput.current.value = "";
+    console.log(taskText);
     e.preventDefault();
   };
 
@@ -47,9 +44,11 @@ function App() {
       task.id === id ? { ...task, favorite: !task.favorite } : task
     );
 
-    const pushFavorite = isFavorite.filter(task => task.favorite ? task : null)
-    console.log(isFavorite)
-    console.log(pushFavorite)
+    const pushFavorite = isFavorite.filter((task) =>
+      task.favorite ? task : null
+    );
+    console.log(isFavorite);
+    console.log(pushFavorite);
 
     setTask(isFavorite);
     setFavorite(pushFavorite);
@@ -164,85 +163,22 @@ function App() {
             />
           </Route>
           <Route path="/">
-            {/* <Home /> */}
-            <div className="App-content-title-app">
-              <h1>To-do App</h1>
-            </div>
-
-            <section className="App-content-all-todolist">
-              <aside className="App-aside">
-                <span>Filtrar por:</span>
-                <FilterTask handleFilterTask={handleFilterTask} />
-                <FilterDate handleFilterDate={handleFilterDate} />
-              </aside>
-
-              <main className="App-main">
-                <section className="App-todo">
-                  <Todo
-                    taskList={task}
-                    handleClickFavorite={handleClickFavorite}
-                    handleClickDelete={handleClickDelete}
-                    handleClickSave={handleClickSave}
-                    handleClickComplete={handleClickComplete}
-                    handleClickEdit={handleClickEdit}
-                  />
-                  <div className="content-input-user-task">
-                    <form
-                      className="form-user-input"
-                      onSubmit={(e) => handleSubmit(e)}
-                    >
-                      <label htmlFor="todo-text">Añade una tarea</label>
-                      <input
-                        id="todo-text"
-                        type="text"
-                        placeholder="Añade una tarea"
-                        name="todo-text"
-                        ref={refInput}
-                      />
-                    </form>
-                  </div>
-                </section>
-
-                <div className="App-select-state-task">
-                  <span
-                    onClick={handleSelectFavorites}
-                    className="App-handle-select favorite"
-                  >
-                    Favoritos
-                  </span>
-                  <span
-                    onClick={handleSelectCompleted}
-                    className="App-handle-select completed"
-                  >
-                    Completados
-                  </span>
-                  <span
-                    onClick={handleSelectNotCompleted}
-                    className="App-handle-select no-completed"
-                  >
-                    No completados
-                  </span>
-                </div>
-
-                <div className="App-select-delete-all">
-                  <span
-                    onClick={handleDeleteSelect}
-                    className="App-handle-select select-all"
-                  >
-                    Eliminar seleccionados
-                  </span>
-                  <span
-                    onClick={handleSelectAll}
-                    className="App-handle-select select-all"
-                  >
-                    Seleccionar todos
-                  </span>
-                  {/* <span className="App-handle-select delete-all">
-                    Borrar todos
-                  </span> */}
-                </div>
-              </main>
-            </section>
+            <Home
+              task={task}
+              handleFilterTask={handleFilterTask}
+              handleFilterDate={handleFilterDate}
+              handleClickFavorite={handleClickFavorite}
+              handleClickDelete={handleClickDelete}
+              handleClickSave={handleClickSave}
+              handleClickComplete={handleClickComplete}
+              handleClickEdit={handleClickEdit}
+              handleSelectFavorites={handleSelectFavorites}
+              handleSelectCompleted={handleSelectCompleted}
+              handleSelectAll={handleSelectAll}
+              handleDeleteSelect={handleDeleteSelect}
+              handleSelectNotCompleted={handleSelectNotCompleted}
+              handleSubmit={handleSubmit}
+            />
           </Route>
         </Switch>
       </div>
