@@ -6,38 +6,12 @@ import FilterTask from "./components/FilterTask/FilterTask";
 import Todo from "./components/Todo/Todo";
 import { useRef, useState } from "react";
 import FilterDate from "./components/FilterDate/FilterDate";
-
-export const useSaveTask = () => {
-  const [task, setTask] = useState(
-    JSON.parse(localStorage.getItem("task")) || []
-  );
-
-  localStorage.setItem("task", JSON.stringify(task));
-  return [task, setTask];
-};
-
-export const useSaveFavorite = () => {
-  const [favorite, setFavorite] = useState(
-    JSON.parse(localStorage.getItem("favorite")) || []
-  );
-
-  localStorage.setItem("favorite", JSON.stringify(favorite));
-  return [favorite, setFavorite];
-};
-
-export const useSaveAll = () => {
-  const [favorite, setFavorite] = useState(
-    JSON.parse(localStorage.getItem("alltask")) || []
-  );
-
-  localStorage.setItem("alltask", JSON.stringify(favorite));
-  return [favorite, setFavorite];
-};
+import { useSaveData } from "./hooks/useSaveData/useSaveData";
 
 function App() {
-  const [task, setTask] = useSaveTask();
-  const [allTask, setAllTask] = useSaveAll();
-  const [favorite, setFavorite] = useSaveFavorite();
+  const [task, setTask] = useSaveData("task");
+  const [allTask, setAllTask] = useSaveData("alltask");
+  const [favorite, setFavorite] = useSaveData("favorite");
   const refInput = useRef(null);
 
   const handleSubmit = (e) => {
@@ -53,7 +27,7 @@ function App() {
       date: date.toLocaleString(),
     };
     const arrTask = task.concat([taskObject]);
-    setAllTask(arrTask)
+    setAllTask(arrTask);
     setTask(arrTask);
     refInput.current.value = "";
     e.preventDefault();
@@ -73,25 +47,29 @@ function App() {
       task.id === id ? { ...task, favorite: !task.favorite } : task
     );
 
+    const pushFavorite = isFavorite.filter(task => task.favorite ? task : null)
+    console.log(isFavorite)
+    console.log(pushFavorite)
+
     setTask(isFavorite);
-    setFavorite(isFavorite)
-    setAllTask(isFavorite)
+    setFavorite(pushFavorite);
+    setAllTask(isFavorite);
   };
 
   const handleClickDelete = (e) => {
-    console.log(e)
+    console.log(e);
     const id = e.currentTarget.dataset.taskid;
     const newArr = task.filter((task) => task.id !== id);
     const newArrFavorite = favorite.filter((task) => task.id !== id);
     setTask(newArr);
-    setFavorite(newArrFavorite)
+    setFavorite(newArrFavorite);
   };
 
   const handleSelectFavorites = (e) => {
     const isSelected = task.map((task) =>
       task.favorite ? { ...task, selected: !task.selected } : task
     );
-    
+
     setTask(isSelected);
   };
 
@@ -147,21 +125,20 @@ function App() {
   };
 
   const handleFilterTask = (e) => {
-    console.log(e.target.checked)
-    const filterFavorite = task.filter(task => task.favorite ? task : null )    
+    console.log(e.target.checked);
+    const filterFavorite = task.filter((task) => (task.favorite ? task : null));
     // setTask(filterFavorite)
-    e.target.checked ? setTask(filterFavorite) : setTask(allTask)
-  }
+    e.target.checked ? setTask(filterFavorite) : setTask(allTask);
+  };
 
   const handleFilterDate = (e) => {
-    const value  = e.target.lastChild.value
-    e.preventDefault()
-    const filterDate = task.filter(task => {
+    const value = e.target.lastChild.value;
+    e.preventDefault();
+    const filterDate = task.filter((task) => {
       const regex = new RegExp(value, "gi");
-      return task.date.match(regex)
-    })   
-    
-  }
+      return task.date.match(regex);
+    });
+  };
 
   return (
     <Router>
@@ -181,7 +158,10 @@ function App() {
 
         <Switch>
           <Route path="/favorites">
-            <Favorite favoriteArr={favorite} handleClickDelete={handleClickDelete} />
+            <Favorite
+              favoriteArr={favorite}
+              handleClickDelete={handleClickDelete}
+            />
           </Route>
           <Route path="/">
             {/* <Home /> */}
@@ -193,7 +173,7 @@ function App() {
               <aside className="App-aside">
                 <span>Filtrar por:</span>
                 <FilterTask handleFilterTask={handleFilterTask} />
-                <FilterDate handleFilterDate={handleFilterDate}/>
+                <FilterDate handleFilterDate={handleFilterDate} />
               </aside>
 
               <main className="App-main">

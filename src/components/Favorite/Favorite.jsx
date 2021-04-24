@@ -7,8 +7,7 @@ const Favorite = ({ favoriteArr, handleClickDelete }) => {
   
   return (
     <section className="App-favorite-section">
-      {favoriteArr.map((task) => (
-        task.favorite ? 
+      {favoriteArr.map((task) => ( 
         <Task
           key={task.text}
           objTask={task}
@@ -17,7 +16,6 @@ const Favorite = ({ favoriteArr, handleClickDelete }) => {
           // handleClickSave={handleClickSave}
           // handleClickComplete={handleClickComplete}
         />
-        : null
       ))}
     </section>
   );
