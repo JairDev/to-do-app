@@ -162,8 +162,9 @@ function App() {
 
     // })
     const date = new Date()
-    console.log(date.getUTCDate())
-    console.log(date.getTime())
+    // console.log(date.getUTCDate())
+    // console.log(date.getTime())
+    console.log(date)
     e.preventDefault();
   };
 
