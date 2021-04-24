@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import FilterDate from "../../components/FilterDate/FilterDate";
 import FilterTask from "../../components/FilterTask/FilterTask";
 import Todo from "../../components/Todo/Todo";
-import "./Home.css"
+import "./Home.css";
 
 const Home = ({
   task,
@@ -21,8 +21,6 @@ const Home = ({
   handleSubmit,
 }) => {
   const refInput = useRef(null);
-  // const taskText = refInput.current.value;
-
 
   return (
     <>
@@ -34,7 +32,7 @@ const Home = ({
         <aside className="App-aside">
           <span>Filtrar por:</span>
           <FilterTask handleFilterTask={handleFilterTask} />
-          <FilterDate handleFilterDate={handleFilterDate} />
+          <FilterDate handleFilterDate={handleFilterDate}  />
         </aside>
 
         <main className="App-main">

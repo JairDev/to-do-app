@@ -8,6 +8,13 @@
 }
 
 .App-content-filter-date input {
-  padding: .5rem 0;
+  padding: .5rem;
   margin-top: .5rem;
+}
+.span-date {
+  margin-top: .3rem;
+}
+
+.span-date-range-desde, .span-date-range-hasta {
+  margin: .3rem 0;
 }

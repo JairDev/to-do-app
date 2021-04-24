@@ -12,7 +12,6 @@ function App() {
   const handleSubmit = (e, refInput) => {
     const date = new Date();
     const taskText = refInput.current.value;
-
     const taskObject = {
       id: taskText,
       text: taskText,
@@ -21,12 +20,12 @@ function App() {
       selected: false,
       edit: false,
       date: date.toLocaleString(),
+      day: date.toLocaleDateString(),
     };
     const arrTask = task.concat([taskObject]);
     setAllTask(arrTask);
     setTask(arrTask);
     refInput.current.value = "";
-    console.log(taskText);
     e.preventDefault();
   };
 
@@ -130,13 +129,42 @@ function App() {
     e.target.checked ? setTask(filterFavorite) : setTask(allTask);
   };
 
-  const handleFilterDate = (e) => {
-    const value = e.target.lastChild.value;
+  const handleFilterDate = (e, init, end) => {
+    // const value = e.target.lastChild.value;
+    // const filterDate = task.filter((task) => {
+    //   const regex = new RegExp(value, "gi");
+    //   return task.date.match(regex);
+    // });
+    // console.log(filterDate)
+    // const dates = Object.keys(task)
+    // console.log(task)
+    const initValue = init.current.value;
+    const endValue = end.current.value;
+    
+    // const taskDates = task.map(task => {
+    //   // const dates = Object.keys(task)
+    //   // console.log(task)
+    //   return task.date
+    // })
+    // const dateMatch = taskDates.some(date => {
+    //   const newDate = new Date(date)
+    //   return newDate >= initValue && newDate <= endValue
+    // })
+    // console.log(taskDates)
+    // console.log(dateMatch)
+    // console.log(initValue, endValue)
+    // const getDate = task.filter(task => {
+    //   const date = task.day
+    //   // const nowDate = new Date().toLocaleDateString()
+    //   // const nowDate = new Date(date)
+    //   // console.log(nowDate)
+    //   // console.log(date)
+
+    // })
+    const date = new Date()
+    console.log(date.getUTCDate())
+    console.log(date.getTime())
     e.preventDefault();
-    const filterDate = task.filter((task) => {
-      const regex = new RegExp(value, "gi");
-      return task.date.match(regex);
-    });
   };
 
   return (
