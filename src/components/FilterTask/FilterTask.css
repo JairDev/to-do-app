@@ -1,12 +1,27 @@
 .App-content-filter {
-  /* border: 2px solid red; */
-  cursor: pointer;
   position: relative;
   margin-top: .5rem;
   z-index: 5;
 
 }
 
+.App-content-filter label {
+  cursor: pointer;
+}
+
 #filter-check {
   margin-right: .5rem;
+}
+
+.handle-error-empty-favorite {
+  display: block;
+  color: red;
+  font-size: .9rem;
+  position: absolute;
+  top: 110%;
+  opacity: 0;
+}
+
+.handle-error-empty-favorite.display-error-favorite {
+  opacity: 1;
 }

@@ -55,7 +55,7 @@ const Task = ({
 
   return (
     <div ref={refTask} className="App-task">
-      <span className="date-task">{objTask.date}</span>
+      <span className="date-task">{objTask.dateFormat}</span>
       <span ref={spanCompletedStyle} className="style-completed"></span>
       <div className="App-check-completed">
         <form>

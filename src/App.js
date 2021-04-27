@@ -19,8 +19,8 @@ function App() {
       favorite: false,
       selected: false,
       edit: false,
-      date: date.toLocaleString(),
-      day: date.toLocaleDateString(),
+      dateFormat: date.toLocaleString(),
+      taskCreate: date.toISOString(),
     };
     const arrTask = task.concat([taskObject]);
     setAllTask(arrTask);
@@ -55,7 +55,6 @@ function App() {
   };
 
   const handleClickDelete = (e) => {
-    console.log(e);
     const id = e.currentTarget.dataset.taskid;
     const newArr = task.filter((task) => task.id !== id);
     const newArrFavorite = favorite.filter((task) => task.id !== id);
@@ -123,48 +122,27 @@ function App() {
   };
 
   const handleFilterTask = (e) => {
-    console.log(e.target.checked);
+    const errorSpan = document.querySelector(".handle-error-empty-favorite");
     const filterFavorite = task.filter((task) => (task.favorite ? task : null));
-    // setTask(filterFavorite)
+    if (!filterFavorite.length) {
+      errorSpan.classList.add("display-error-favorite");
+      e.target.checked = false
+      setTimeout(() => {
+        errorSpan.classList.remove("display-error-favorite");
+      }, 500);
+      return;
+    }
     e.target.checked ? setTask(filterFavorite) : setTask(allTask);
   };
 
   const handleFilterDate = (e, init, end) => {
-    // const value = e.target.lastChild.value;
-    // const filterDate = task.filter((task) => {
-    //   const regex = new RegExp(value, "gi");
-    //   return task.date.match(regex);
-    // });
-    // console.log(filterDate)
-    // const dates = Object.keys(task)
-    // console.log(task)
-    const initValue = init.current.value;
-    const endValue = end.current.value;
-    
-    // const taskDates = task.map(task => {
-    //   // const dates = Object.keys(task)
-    //   // console.log(task)
-    //   return task.date
-    // })
-    // const dateMatch = taskDates.some(date => {
-    //   const newDate = new Date(date)
-    //   return newDate >= initValue && newDate <= endValue
-    // })
-    // console.log(taskDates)
-    // console.log(dateMatch)
-    // console.log(initValue, endValue)
-    // const getDate = task.filter(task => {
-    //   const date = task.day
-    //   // const nowDate = new Date().toLocaleDateString()
-    //   // const nowDate = new Date(date)
-    //   // console.log(nowDate)
-    //   // console.log(date)
-
-    // })
-    const date = new Date()
-    // console.log(date.getUTCDate())
-    // console.log(date.getTime())
-    console.log(date)
+    const initD = new Date(init.value);
+    const finalD = new Date(end.value);
+    const filterDate = task.filter((task) => {
+      const dateCreate = task.taskCreate;
+      const date = new Date(dateCreate);
+      if (date >= initD && date <= finalD) return task;
+    });
     e.preventDefault();
   };
 
