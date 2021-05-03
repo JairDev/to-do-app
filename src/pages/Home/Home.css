@@ -1,0 +1,7 @@
+.App-content-actions {
+  background-color: var(--very-dark-grayish-blue);
+  display: flex;
+  color: var(--very-light-gray);
+  justify-content: space-between;
+  padding: 1rem;
+}

@@ -55,7 +55,7 @@ const Task = ({
 
   return (
     <div ref={refTask} className="App-task">
-      <span className="date-task">{objTask.dateFormat}</span>
+      {/* <span className="date-task">{objTask.dateFormat}</span> */}
       <span ref={spanCompletedStyle} className="style-completed"></span>
       <div className="App-check-completed">
         <form>
@@ -93,15 +93,15 @@ const Task = ({
         </span>
       </div>
 
-      <div className="content-editar action-task">
+      {/* <div className="content-editar action-task">
         <form>
           <button onClick={(e) => handleClickEdit(e, objTask, editTask)}>
             {objTask.edit ? "Guardar" : "Editar"}
           </button>
         </form>
-      </div>
+      </div> */}
 
-      <div className="content-guardar action-task">
+      {/* <div className="content-guardar action-task">
         <form>
           <button
             data-taskid={objTask.id}
@@ -110,7 +110,7 @@ const Task = ({
             Guardar
           </button>
         </form>
-      </div>
+      </div> */}
 
       <div className="content-icon-delete action-task">
         <span

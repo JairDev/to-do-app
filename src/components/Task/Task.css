@@ -1,8 +1,9 @@
 .App-task {
-  border: 2px solid rgb(11, 109, 148);
+  /* border: 2px solid rgb(11, 109, 148); */
+  border-bottom: 2px solid rgb(28, 24, 49);
   display: flex;
   align-items: center;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
   padding: 1rem;
   position: relative;
 }

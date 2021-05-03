@@ -4,10 +4,39 @@
   margin: 0;
   list-style: none;
 }
+
+:root {
+  --primary-color: hsl(220, 98%, 61%);
+  --check-background: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+  /* light theme */
+  --very-light-gray: hsl(0, 0%, 98%);
+  --very-light-grayish-blue: hsl(236, 33%, 92%);
+  --light-grayish-blue: hsl(233, 11%, 84%);
+  --dark-grayish-blue: hsl(236, 9%, 61%);
+  --very-dark-grayish-blue: hsl(235, 19%, 35%);
+  /* end-light theme */
+  /* dark theme */
+  --very-dark-blue: hsl(235, 21%, 11%);
+  --very-dark-desaturated-blue: hsl(235, 24%, 19%);
+  --light-grayish-blue: hsl(234, 39%, 85%);
+  --light-grayish-blue-hover: hsl(236, 33%, 92%);
+  --dark-grayish-blue: hsl(234, 11%, 52%);
+  --very-dark-grayish-blue: hsl(233, 14%, 35%);
+  --very-dark-grayish-blue: hsl(237, 14%, 26%);
+  --general-font-size: 18px;
+}
+
 a {
   text-decoration: none;
 }
+
+input {
+  border: none;
+  background: none;
+}
+
 .App {
+  background-color: var(--very-dark-blue);
   min-height: 100vh;
 }
 
@@ -20,8 +49,9 @@ a {
   justify-content: space-around;
   padding: 2rem 0;
 }
+
 .App-nav li {
-  font-size: calc(1vw + .8em);
+  font-size: calc(1vw + 0.8em);
   color: rgb(21, 21, 51);
 }
 
@@ -47,31 +77,40 @@ a {
 .App-main {
   /* border: 2px solid black; */
   display: flex;
-  flex: 1;
+  /* flex: 1; */
   flex-direction: column;
   justify-content: center;
+  width: 50%;
   /* align-items: center; */
-  padding: 2rem 3rem;
+  /* padding: 2rem 3rem; */
 }
 
 .App-todo {
-  border: 2px solid rgb(30, 53, 83);
-  padding: 2rem;
+  /* border: 2px solid rgb(30, 53, 83); */
+  /* padding: 2rem; */
 }
 
 .content-input-user-task {
-  margin-top: 2rem;
+  background-color: var(--very-dark-grayish-blue);
+  color: var(--very-light-gray);
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.content-input-user-task input {
+  color: var(--very-light-gray);
 }
 
 .content-input-user-task input {
   font-size: calc(1vw + 0.7em);
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .App-select-state-task,
 .App-select-delete-all {
   display: flex;
-  margin-top: 1rem;
+  width: 35%;
+  /* margin-top: 1rem; */
 }
 
 .App-select-state-task {
@@ -93,12 +132,14 @@ a {
 
 .App-content-all-todolist {
   display: flex;
+  justify-content: center;
 }
 
 .App-handle-select {
   cursor: pointer;
 }
 
-.App-select-delete-all, .App-select-state-task {
-  font-size: calc(1vw + .6em);
+.App-select-delete-all,
+.App-select-state-task {
+  /* font-size: calc(1vw + 0.6em); */
 }
