@@ -3,6 +3,7 @@ import Favorite from "./components/Favorite/Favorite";
 import { useSaveData } from "./hooks/useSaveData/useSaveData";
 import Home from "./pages/Home/Home";
 import "./App.css";
+import image from "./assets/img/bg-desktop-dark.jpg"
 
 function App() {
   const [task, setTask] = useSaveData("task");
@@ -134,7 +135,7 @@ function App() {
     }
     e.target.checked ? setTask(filterFavorite) : setTask(allTask);
   };
-
+  
   const handleFilterDate = (e, init, end) => {
     const initD = new Date(init.value);
     const finalD = new Date(end.value);
@@ -149,6 +150,9 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <div className="App-content-image-hero">
+          <img src={image} alt=""></img>
+        </div>
         <header className="App-header">
           <nav className="App-nav">
             <ul>

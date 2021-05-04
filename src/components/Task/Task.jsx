@@ -116,11 +116,12 @@ const Task = ({
         <span
           data-taskid={objTask.id}
           onClick={handleClickDelete}
-          className="icon-delete"
+          className="icon-delete-letter"
         >
-          <svg className="icon icon-bin">
+          {/* <svg className="icon icon-bin">
             <use xlinkHref="#icon-bin"></use>
-          </svg>
+          </svg> */}
+          x
         </span>
       </div>
     </div>

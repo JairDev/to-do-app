@@ -4,8 +4,8 @@
 
 .App-todo-list {
   /* border: 2px solid rgb(255, 22, 22); */
-  background-color: var(--very-dark-grayish-blue);
-  color: var(--very-light-gray);
+  background-color: var(--very-dark-desaturated-blue);
+  color: var(--dark-grayish-blue);
   /* padding: 1rem; */
 }
 

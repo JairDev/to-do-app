@@ -1,7 +1,7 @@
 .App-content-actions {
-  background-color: var(--very-dark-grayish-blue);
+  background-color: var(--very-dark-desaturated-blue);
   display: flex;
-  color: var(--very-light-gray);
+  color: var(--dark-grayish-blue);
   justify-content: space-between;
   padding: 1rem;
 }

@@ -24,10 +24,6 @@ const Home = ({
 
   return (
     <>
-      <div className="App-content-title-app">
-        <h1>To-do App</h1>
-      </div>
-
       <section className="App-content-all-todolist">
         {/* <aside className="App-aside">
           <span>Filtrar por:</span>
@@ -35,6 +31,14 @@ const Home = ({
           <FilterDate handleFilterDate={handleFilterDate} />
         </aside> */}
 
+        <div className="App-content-title-app">
+          <div className="title-app">
+            <h1>TODO</h1>
+          </div>
+          <div className="icon-mode">
+
+          </div>
+        </div>
         <main className="App-main">
           <section className="App-todo">
             <div className="content-input-user-task">

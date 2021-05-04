@@ -28,14 +28,20 @@
   font-size: calc(1vw + 0.7em);
 }
 
-.icon-favorite,
-.icon-delete {
+.icon-favorite {
   /* border: 2px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--dark-grayish-blue);
   width: 20px;
   height: 20px;
+}
+
+.icon-delete-letter {
+  color: var(--dark-grayish-blue);
+  font-size: 2.1rem;
+  font-weight: 100;
 }
 
 .action-task {
@@ -74,5 +80,5 @@
   position: absolute;
   top: -30px;
   right: 0;
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
