@@ -35,6 +35,7 @@ function App() {
     const objIsComplete = task.map((task) =>
       task.id === id ? { ...task, completed: !task.completed } : task
     );
+    // console.log("completed")
     setTask(objIsComplete);
   };
 

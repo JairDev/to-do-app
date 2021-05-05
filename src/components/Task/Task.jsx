@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Task.css";
+import svgCheck from "../../assets/img/icon-check.svg";
 
 const Task = ({
   objTask,
@@ -15,11 +16,14 @@ const Task = ({
   const refTask = useRef(null);
   const [editTask, setEditTask] = useState("");
   const inputRef = useRef(null);
+  const checkRadiusStyle = useRef(null);
 
   useEffect(() => {
+    console.log(svgCheck);
     const svg = favoriteIconRef.current;
     const span = spanCompletedStyle.current;
     const task = refTask.current;
+    const checkCompleted = checkRadiusStyle.current;
     let check = isCheckedStyle.current;
 
     objTask.favorite
@@ -29,6 +33,10 @@ const Task = ({
     objTask.completed
       ? span.classList.add("line-completed")
       : span.classList.remove("line-completed");
+
+    objTask.completed
+      ? checkCompleted.classList.add("completed")
+      : checkCompleted.classList.remove("completed");
 
     objTask.completed ? (check.checked = true) : (check.checked = false);
 
@@ -58,6 +66,11 @@ const Task = ({
       {/* <span className="date-task">{objTask.dateFormat}</span> */}
       <span ref={spanCompletedStyle} className="style-completed"></span>
       <div className="App-check-completed">
+        <span ref={checkRadiusStyle} className="check-style">
+          <svg className="icon icon-checkmark">
+            <use xlinkHref="#icon-checkmark"></use>
+          </svg>
+        </span>
         <form>
           <input
             id="input-check"
@@ -88,7 +101,7 @@ const Task = ({
           className="icon-favorite"
         >
           <svg ref={favoriteIconRef} className="icon icon-star-empty">
-            <use xlinkHref="#icon-star-empty"></use>
+            {/* <use xlinkHref="#icon-star-empty"></use> */}
           </svg>
         </span>
       </div>

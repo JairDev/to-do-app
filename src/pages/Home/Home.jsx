@@ -3,6 +3,7 @@ import FilterDate from "../../components/FilterDate/FilterDate";
 import FilterTask from "../../components/FilterTask/FilterTask";
 import Todo from "../../components/Todo/Todo";
 import "./Home.css";
+import svgMode from "../../assets/img/icon-sun.svg"
 
 const Home = ({
   task,
@@ -35,8 +36,9 @@ const Home = ({
           <div className="title-app">
             <h1>TODO</h1>
           </div>
-          <div className="icon-mode">
 
+          <div className="icon-mode">
+            <img src={svgMode} alt=""></img>
           </div>
         </div>
         <main className="App-main">

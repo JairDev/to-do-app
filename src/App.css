@@ -7,7 +7,7 @@
 
 :root {
   --primary-color: hsl(220, 98%, 61%);
-  --check-background: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+  --check-background: linear-gradient(hsl(192, 100%, 67%),hsl(280, 87%, 65%));
   /* light theme */
   --very-light-gray: hsl(0, 0%, 98%);
   --very-light-grayish-blue: hsl(236, 33%, 92%);
@@ -45,7 +45,9 @@ input {
 }
 
 .App-content-image-hero {
+  /* border: 2px solid red; */
   position: absolute;
+  height: 50vh;
 }
 
 .App-content-image-hero img {
@@ -74,10 +76,11 @@ input {
   /* background-color: rgb(131, 131, 192); */
   color: rgb(245, 245, 245);
   display: flex;
-  /* justify-content: center; */
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  padding: 1rem;
-  margin-bottom: 2rem;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
   font-size: 1.5rem;
   letter-spacing: 10px;
 }
@@ -109,8 +112,10 @@ input {
 
 .content-input-user-task {
   background-color: var(--very-dark-desaturated-blue);
+  border-radius: 5px;
+  box-shadow: 0px 8px 15px rgba(27, 33, 44, .6);
   color: var(--very-light-gray);
-  padding: 1rem;
+  padding: .5rem 0;
   margin-bottom: 2rem;
 }
 
@@ -118,10 +123,9 @@ input {
   color: var(--very-light-gray);
 }
 
-.content-input-user-task input {
+/* .content-input-user-task input {
   font-size: calc(1vw + 0.7em);
-  margin-top: 0.5rem;
-}
+} */
 
 .App-select-state-task,
 .App-select-delete-all {
@@ -144,11 +148,12 @@ input {
 }
 
 .form-user-input input {
-  padding: 0.5rem;
+  padding: 1rem 1rem;
+  font-size: calc(1vw + 0.3em);
 }
 
 .App-content-all-todolist {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;

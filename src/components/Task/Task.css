@@ -1,10 +1,10 @@
 .App-task {
   /* border: 2px solid rgb(11, 109, 148); */
-  border-bottom: 2px solid rgb(28, 24, 49);
+  border-bottom: 1px solid var(--very-dark-grayish-blue);
   display: flex;
   align-items: center;
   /* margin-bottom: 2rem; */
-  padding: 1rem;
+  padding: .5rem 1rem;
   position: relative;
 }
 
@@ -16,6 +16,19 @@
 
 .App-check-completed {
   margin-right: 1.5vw;
+  width: 25px;
+  height: 25px;
+}
+
+.App-check-completed form {
+  width: 100%;
+  height: 100%;
+}
+
+.App-check-completed form input {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
 }
 
 .App-task-edit {
@@ -23,10 +36,38 @@
 }
 
 .App-task-edit input {
+  color: var(--light-grayish-blue);
   width: 90%;
-  padding: 0.5rem;
-  font-size: calc(1vw + 0.7em);
+  padding: 1rem;
+  font-size: calc(1vw + 0.3em);
 }
+
+.check-style {
+  border: 1px solid var(--very-dark-grayish-blue);
+  border-radius: 50%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+}
+
+.icon-checkmark {
+  width: 12px;
+  height: 12px;
+  fill: white;
+  opacity: 0;
+}
+
+.check-style.completed {
+  background: var(--check-background);  
+}
+
+.check-style.completed .icon-checkmark {
+  opacity: 1;
+}
+
 
 .icon-favorite {
   /* border: 2px solid red; */
@@ -65,15 +106,20 @@
 }
 
 .style-completed {
-  border: 1px solid rgb(43, 45, 61);
+  border: 1px solid var(--very-dark-grayish-blue);
   position: absolute;
-  width: 90%;
+  left: 40px;
+  width: 60%;
   margin-left: 1rem;
   opacity: 0;
 }
 
 .style-completed.line-completed {
   opacity: 1;
+}
+
+#input-check {
+  opacity: 0;
 }
 
 .date-task {
