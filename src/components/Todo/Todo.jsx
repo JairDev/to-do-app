@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Task from "../Task/Task";
 import "./Todo.css";
 
@@ -8,22 +8,33 @@ const Todo = ({
   handleClickDelete,
   handleClickSave,
   handleClickComplete,
-  handleClickEdit
+  handleClickEdit,
+  handleDragStart,
+  handleDrop
 }) => {
   // if(!taskList.length) return <div className="empty-task">Sin tareas</div>
+  const contentRef = useRef(null);
+  console.log(taskList)
   return (
-    <section className="App-todo-list">
-      {taskList.map((task) => (
-        <Task
-          key={task.text}
-          objTask={task}
-          handleClickFavorite={handleClickFavorite}
-          handleClickDelete={handleClickDelete}
-          handleClickSave={handleClickSave}
-          handleClickComplete={handleClickComplete}
-          handleClickEdit={handleClickEdit}
-        />
-      ))}
+    <section
+      ref={contentRef}
+      className="App-todo-list"
+    >
+      {taskList
+        .sort((a, b) => a.order - b.order)
+        .map((task) => (
+          <Task
+            key={task.text}
+            objTask={task}
+            handleClickFavorite={handleClickFavorite}
+            handleClickDelete={handleClickDelete}
+            handleClickSave={handleClickSave}
+            handleClickComplete={handleClickComplete}
+            handleClickEdit={handleClickEdit}
+            handleDragStart={handleDragStart}
+            handleDrop={handleDrop}
+          />
+        ))}
     </section>
   );
 };

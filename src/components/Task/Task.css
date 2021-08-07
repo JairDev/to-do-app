@@ -11,7 +11,7 @@
 .App-task.selected-favorite,
 .App-task.selected-completed,
 .App-task.selected-not-completed {
-  border: 2px solid red;
+  background-color: hsl(233, 25%, 27%);
 }
 
 .App-check-completed {
@@ -35,15 +35,23 @@
   flex: 1;
 }
 
-.App-task-edit input {
+/* .App-task-edit input {
   color: var(--light-grayish-blue);
   width: 90%;
   padding: 1rem;
   font-size: calc(1vw + 0.3em);
+} */
+
+.App-task-edit p {
+  color: var(--light-grayish-blue);
+  width: 90%;
+  padding: 1rem;
+  font-size: calc(1vw + 0.5em);
+  letter-spacing: 1px;
 }
 
 .check-style {
-  border: 1px solid var(--very-dark-grayish-blue);
+  border: 2px solid var(--very-dark-grayish-blue);
   border-radius: 50%;
   display:flex;
   justify-content: center;
@@ -75,8 +83,9 @@
   justify-content: center;
   align-items: center;
   color: var(--dark-grayish-blue);
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
+  margin-right: 1vw;
 }
 
 .icon-delete-letter {

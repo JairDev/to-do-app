@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Task.css";
-import svgCheck from "../../assets/img/icon-check.svg";
+import { Icon, InlineIcon } from "@iconify/react";
+import starOutlined from "@iconify/icons-ant-design/star-outlined";
+import deleteOutlined from "@iconify/icons-ant-design/delete-outlined";
 
+import svgCheck from "../../assets/img/icon-check.svg";
 const Task = ({
   objTask,
   handleClickFavorite,
@@ -9,17 +12,19 @@ const Task = ({
   handleClickSave,
   handleClickComplete,
   handleClickEdit,
+  handleDragStart,
+  handleDrop,
 }) => {
   const favoriteIconRef = useRef(null);
   const spanCompletedStyle = useRef(null);
   const isCheckedStyle = useRef(null);
   const refTask = useRef(null);
-  const [editTask, setEditTask] = useState("");
-  const inputRef = useRef(null);
+  // const [editTask, setEditTask] = useState("");
+  // const inputRef = useRef(null);
   const checkRadiusStyle = useRef(null);
 
   useEffect(() => {
-    console.log(svgCheck);
+    // console.log(svgCheck);
     const svg = favoriteIconRef.current;
     const span = spanCompletedStyle.current;
     const task = refTask.current;
@@ -53,16 +58,26 @@ const Task = ({
       : task.classList.remove("selected-not-completed");
   }, [objTask.completed, objTask.favorite, objTask.selected]);
 
-  const handleChange = (e) => {
-    setEditTask(e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setEditTask(e.target.value);
+  // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // };
 
   return (
-    <div ref={refTask} className="App-task">
+    <div
+      id={objTask.id}
+      onDragOver={(e) => e.preventDefault()}
+      onDragStart={handleDragStart}
+      onDrop={handleDrop}
+      // onDragStart={onDragStart}
+      // onDragEnd={onDragEnd}
+      ref={refTask}
+      className="App-task"
+      draggable={true}
+    >
       {/* <span className="date-task">{objTask.dateFormat}</span> */}
       <span ref={spanCompletedStyle} className="style-completed"></span>
       <div className="App-check-completed">
@@ -82,7 +97,7 @@ const Task = ({
         </form>
       </div>
       <div className="App-task-edit">
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}>
           <input
             id="input-task-edit"
             type="text"
@@ -92,7 +107,8 @@ const Task = ({
             readOnly="readonly"
             ref={inputRef}
           />
-        </form>
+        </form> */}
+        <p>{objTask.text}</p>
       </div>
 
       <div className="content-icon-favorite action-task">
@@ -102,6 +118,7 @@ const Task = ({
         >
           <svg ref={favoriteIconRef} className="icon icon-star-empty">
             {/* <use xlinkHref="#icon-star-empty"></use> */}
+            <Icon icon={starOutlined} style={{fontSize: '25px'}} />
           </svg>
         </span>
       </div>
@@ -134,7 +151,7 @@ const Task = ({
           {/* <svg className="icon icon-bin">
             <use xlinkHref="#icon-bin"></use>
           </svg> */}
-          x
+          <Icon icon={deleteOutlined} style={{fontSize: '25px'}} />
         </span>
       </div>
     </div>
