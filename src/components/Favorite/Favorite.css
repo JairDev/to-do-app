@@ -1,5 +1,4 @@
 .no-favorite {
-  /* border: 2px solid red; */
   color: rgb(255, 255, 255);
   font-size: 1.4rem;
   z-index: 100;
@@ -14,5 +13,6 @@
 .App-favorite-section {
   background-color: var(--very-dark-desaturated-blue);
   box-shadow: 0px 8px 15px rgb(27 33 44 / 60%);
+  color: var(--light-grayish-blue);
   transition: all .2s linear;
 }

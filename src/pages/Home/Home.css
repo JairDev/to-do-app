@@ -14,11 +14,6 @@
   box-shadow: 0px 8px 15px rgb(69 69 69 / 60%);
 }
 
-/* .App-content-actions.light {
-  background-color: var(--very-dark-desaturated-blue);
-  color: var(--dark-grayish-blue);
-} */
-
 .App-content-actions span:hover:not(.App-content-actions > span:first-child) {
   color: #FFF;
 }
@@ -28,6 +23,5 @@
 }
 
 .icon-mode {
-  /* border: 2px solid red; */
   cursor: pointer;
 }

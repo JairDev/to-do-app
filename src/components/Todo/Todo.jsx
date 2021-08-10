@@ -6,15 +6,15 @@ const Todo = ({
   taskList,
   handleClickFavorite,
   handleClickDelete,
-  handleClickSave,
   handleClickComplete,
-  handleClickEdit,
   handleDragStart,
-  handleDrop
+  handleDrop,
+  handleDragEnd
 }) => {
-  // if(!taskList.length) return <div className="empty-task">Sin tareas</div>
   const contentRef = useRef(null);
-  console.log(taskList)
+  
+  if(!taskList.length) return <div className="empty-task">Agrega una tarea...</div>
+
   return (
     <section
       ref={contentRef}
@@ -28,13 +28,13 @@ const Todo = ({
             objTask={task}
             handleClickFavorite={handleClickFavorite}
             handleClickDelete={handleClickDelete}
-            handleClickSave={handleClickSave}
             handleClickComplete={handleClickComplete}
-            handleClickEdit={handleClickEdit}
             handleDragStart={handleDragStart}
             handleDrop={handleDrop}
+            handleDragEnd={handleDragEnd}
           />
-        ))}
+        ))
+      }
     </section>
   );
 };

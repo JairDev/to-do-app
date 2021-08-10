@@ -7,15 +7,15 @@ import image from "./assets/img/bg-desktop-dark.jpg";
 import { useEffect, useState } from "react";
 
 function App() {
+  const [favorite, setFavorite] = useSaveData("favorite");
   const [task, setTask] = useSaveData("task");
   const [orderTask, setOrderTask] = useState(1)
-  // const [allTask, setAllTask] = useSaveData("alltask");
-  const [favorite, setFavorite] = useSaveData("favorite");
   const [dragId, setDragId] = useState()
 
   useEffect(() => {
     const lastElement = task[task.length - 1]
     if(lastElement) setOrderTask(lastElement.order + 1)
+    console.log(task)
   }, [task])
 
   const handleSubmit = (e, refInput) => {
@@ -34,10 +34,10 @@ function App() {
 
     };
     const arrTask = task.concat([taskObject]);
-    // setAllTask(arrTask);
     setTask(arrTask);
     setOrderTask(prev => prev += 1)
     refInput.current.value = "";
+
     e.preventDefault();
   };
 
@@ -59,11 +59,8 @@ function App() {
     const pushFavorite = isFavorite.filter((task) =>
       task.favorite ? task : null
     );
-    console.log(pushFavorite)
-    console.log(favorite)
     setTask(isFavorite);
     setFavorite(pushFavorite);
-    // setAllTask(isFavorite);
   };
 
   const handleClickDelete = (e) => {
@@ -89,7 +86,6 @@ function App() {
     const isSelected = task.map((task) =>
       !task.completed ? { ...task, selected: !task.selected } : task
     );
-    console.log(isSelected);
     setTask(isSelected);
   };
 
@@ -108,6 +104,7 @@ function App() {
 
   //drag 
   const handleDragStart = (e) => {
+    e.target.style.opacity = "0.3"
     setDragId(e.currentTarget.id)
   }
 
@@ -128,65 +125,15 @@ function App() {
       }
       return task
     })
-    // e.stopPropagation()
     setTask(newTaskState)
   }
 
-  // const handleSelectAll = (e) => {
-  //   const nodeTask = document.querySelectorAll(".App-task");
-  //   Array.from(nodeTask).map((task) => (task.style = "border: 2px solid red"));
-  //   const isAllSelected = task.map((task) => ({
-  //     ...task,
-  //     selected: !task.selected,
-  //   }));
-  //   console.log(isAllSelected);
-  //   setTask(isAllSelected);
-  // };
+  const handleDragEnd = (e) => {
+    console.log(e.target)
+    e.target.style.opacity = "1"
+  }
 
-  // const handleClickEdit = (e, objTask, editTask) => {
-  //   const input = document.getElementById("input-task-edit");
-  //   input.removeAttribute("readonly");
-  //   const isEdit = task.map((task) =>
-  //     task.id === objTask.id ? { ...task, edit: !task.edit } : task
-  //   );
-  //   setTask(isEdit);
-  //   e.preventDefault();
-  // };
-
-  // const handleClickSave = (e, editTask, objTask) => {
-  //   const editCompleted = task.map((task) =>
-  //     task.id === objTask.id && task.edit
-  //       ? { ...task, text: editTask, edit: !task.edit }
-  //       : task
-  //   );
-  //   setTask(editCompleted);
-  //   e.preventDefault();
-  // };
-
-  // const handleFilterTask = (e) => {
-  //   const errorSpan = document.querySelector(".handle-error-empty-favorite");
-  //   const filterFavorite = task.filter((task) => (task.favorite ? task : null));
-  //   if (!filterFavorite.length) {
-  //     errorSpan.classList.add("display-error-favorite");
-  //     e.target.checked = false;
-  //     setTimeout(() => {
-  //       errorSpan.classList.remove("display-e|rror-favorite");
-  //     }, 500);
-  //     return;
-  //   }
-  //   e.target.checked ? setTask(filterFavorite) : setTask(allTask);
-  // };
-
-  // const handleFilterDate = (e, init, end) => {
-  //   const initD = new Date(init.value);
-  //   const finalD = new Date(end.value);
-  //   const filterDate = task.filter((task) => {
-  //     const dateCreate = task.taskCreate;
-  //     const date = new Date(dateCreate);
-  //     if (date >= initD && date <= finalD) return task;
-  //   });
-  //   e.preventDefault();
-  // };
+  // end drag /////////////////////////////////
 
   return (
     <Router>
@@ -217,21 +164,18 @@ function App() {
           <Route path="/">
             <Home
               task={task}
+              handleSubmit={handleSubmit}
               handleClickFavorite={handleClickFavorite}
               handleClickDelete={handleClickDelete}
               handleClickComplete={handleClickComplete}
               handleSelectAllTask={handleSelectAllTask}
               handleSelectCompletedTask={handleSelectCompletedTask}
               handleSelectActiveTask={handleSelectActiveTask}
-              // handleFilterTask={handleFilterTask}
-              // handleFilterDate={handleFilterDate}
-              // handleClickSave={handleClickSave}
-              // handleClickEdit={handleClickEdit}
-              // handleSelectAll={handleSelectAll}
               handleDeleteSelect={handleDeleteSelect}
-              handleSubmit={handleSubmit}
+
               handleDragStart={handleDragStart}
               handleDrop={handleDrop}
+              handleDragEnd={handleDragEnd}
             />
           </Route>
         </Switch>

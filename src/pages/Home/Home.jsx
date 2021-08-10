@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-// import FilterDate from "../../components/FilterDate/FilterDate";
-// import FilterTask from "../../components/FilterTask/FilterTask";
+import React, { useRef } from "react";
 import Todo from "../../components/Todo/Todo";
 import "./Home.css";
 import iconNight from "../../assets/img/icon-moon.svg";
@@ -13,13 +11,13 @@ function changeMode(mode) {
   const task = document.querySelector(".App-todo-list");
   const action = document.querySelector(".App-content-actions");
   if (mode) {
-    iconThemeMode.setAttribute("src", iconNight)
+    iconThemeMode.setAttribute("src", iconNight);
     app.classList.remove("light");
     input.classList.remove("light");
     task.classList.remove("light");
     action.classList.remove("light");
   } else {
-    iconThemeMode.setAttribute("src", iconDay)
+    iconThemeMode.setAttribute("src", iconDay);
     app.classList.add("light");
     input.classList.add("light");
     task.classList.add("light");
@@ -29,37 +27,29 @@ function changeMode(mode) {
 
 const Home = ({
   task,
-  handleFilterTask,
-  handleFilterDate,
   handleClickFavorite,
   handleClickDelete,
-  handleClickSave,
   handleClickComplete,
-  handleClickEdit,
   handleSelectAllTask,
   handleSelectCompletedTask,
-  handleSelectAll,
   handleDeleteSelect,
   handleSelectActiveTask,
   handleSubmit,
   handleDragStart,
-  handleDrop
+  handleDrop,
+  handleDragEnd,
 }) => {
   const refInput = useRef(null);
   let dark = true;
-  const handleMode = (e) => {
+
+  const handleMode = () => {
     dark = !dark;
     changeMode(dark);
   };
+
   return (
     <>
       <section className="App-content-all-todolist">
-        {/* <aside className="App-aside">
-          <span>Filtrar por:</span>
-          <FilterTask handleFilterTask={handleFilterTask} />
-          <FilterDate handleFilterDate={handleFilterDate} />
-        </aside> */}
-
         <div className="App-content-title-app">
           <div className="title-app">
             <h1>TODO</h1>
@@ -76,7 +66,6 @@ const Home = ({
                 className="form-user-input"
                 onSubmit={(e) => handleSubmit(e, refInput)}
               >
-                {/* <label htmlFor="todo-text">Añade una tarea</label> */}
                 <input
                   id="todo-text"
                   type="text"
@@ -90,11 +79,10 @@ const Home = ({
               taskList={task}
               handleClickFavorite={handleClickFavorite}
               handleClickDelete={handleClickDelete}
-              handleClickSave={handleClickSave}
               handleClickComplete={handleClickComplete}
-              handleClickEdit={handleClickEdit}
               handleDragStart={handleDragStart}
               handleDrop={handleDrop}
+              handleDragEnd={handleDragEnd}
             />
           </section>
 
@@ -126,21 +114,6 @@ const Home = ({
             >
               Delete Selected
             </span>
-
-            {/* <div className="App-select-delete-all">
-              <span
-                onClick={handleDeleteSelect}
-                className="App-handle-select select-all"
-              >
-                Clear Completed
-              </span>
-            </div> */}
-            {/* <span
-              onClick={handleSelectAll}
-              className="App-handle-select select-all"
-            >
-              Seleccionar todos
-            </span> */}
           </div>
         </main>
       </section>
