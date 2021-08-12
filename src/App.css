@@ -60,6 +60,8 @@ input {
 }
 
 .App-header {
+  display: flex;
+  justify-content: center;
   width: 100%;
   position: relative;
   z-index: 2;
@@ -67,16 +69,17 @@ input {
 
 .App-nav {
   margin-bottom: 1rem;
+  width: 90%;
 }
 
 .App-nav ul {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 2rem 0;
 }
 
 .App-nav a {
-  font-size: calc(1vw + 0.8em);
+  font-size: calc(1vw + 1em);
   color: rgb(255, 255, 255);
 }
 
@@ -126,6 +129,14 @@ input {
 }
 
 .App-select-state-task {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 2.5vh;
+}
+
+.App-content-action-delete {
+  display: flex;
   justify-content: space-between;
 }
 
@@ -140,7 +151,7 @@ input {
 
 .form-user-input input {
   padding: 1rem 1rem;
-  font-size: calc(1vw + 0.3em);
+  font-size: calc(1vw + 0.8em);
 }
 
 .App-content-all-todolist {
@@ -149,10 +160,8 @@ input {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0 20vw 10vh;
+  padding: 0 10vw 10vh;
   position: relative;
 }
 
-.App-handle-select {
-  cursor: pointer;
-}
+

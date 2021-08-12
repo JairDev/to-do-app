@@ -15,7 +15,6 @@ function App() {
   useEffect(() => {
     const lastElement = task[task.length - 1]
     if(lastElement) setOrderTask(lastElement.order + 1)
-    console.log(task)
   }, [task])
 
   const handleSubmit = (e, refInput) => {

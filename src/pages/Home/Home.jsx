@@ -1,29 +1,8 @@
 import React, { useRef } from "react";
 import Todo from "../../components/Todo/Todo";
 import "./Home.css";
+import { changeMode } from "../../utils/changeThemeMode";
 import iconNight from "../../assets/img/icon-moon.svg";
-import iconDay from "../../assets/img/icon-sun.svg";
-
-function changeMode(mode) {
-  const app = document.querySelector(".App");
-  const iconThemeMode = document.querySelector(".icon-mode img");
-  const input = document.querySelector(".content-input-user-task");
-  const task = document.querySelector(".App-todo-list");
-  const action = document.querySelector(".App-content-actions");
-  if (mode) {
-    iconThemeMode.setAttribute("src", iconNight);
-    app.classList.remove("light");
-    input.classList.remove("light");
-    task.classList.remove("light");
-    action.classList.remove("light");
-  } else {
-    iconThemeMode.setAttribute("src", iconDay);
-    app.classList.add("light");
-    input.classList.add("light");
-    task.classList.add("light");
-    action.classList.add("light");
-  }
-}
 
 const Home = ({
   task,
@@ -87,7 +66,6 @@ const Home = ({
           </section>
 
           <div className="App-content-actions">
-            <span>{task.length} items left</span>
             <div className="App-select-state-task">
               <span
                 onClick={handleSelectAllTask}
@@ -108,12 +86,16 @@ const Home = ({
                 Completed
               </span>
             </div>
-            <span
-              onClick={handleDeleteSelect}
-              className="App-handle-select select-all"
-            >
-              Delete Selected
-            </span>
+
+            <div className="App-content-action-delete">
+              <span>{task.length} items left</span>
+              <span
+                onClick={handleDeleteSelect}
+                className="App-handle-select select-all"
+              >
+                Delete Selected
+              </span>
+            </div>
           </div>
         </main>
       </section>

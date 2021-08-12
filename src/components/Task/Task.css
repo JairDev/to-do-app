@@ -43,7 +43,7 @@
 .App-task-edit p {
   width: 90%;
   padding: 1rem;
-  font-size: calc(1vw + 0.5em);
+  font-size: calc(1vw + 0.9em);
   letter-spacing: 1px;
 }
 
@@ -75,7 +75,6 @@
 
 
 .icon-favorite {
-  /* border: 2px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,6 +88,10 @@
   color: var(--dark-grayish-blue);
   font-size: 2.1rem;
   font-weight: 100;
+}
+
+.icon-delete-letter:hover {
+  color: rgba(255, 0, 0, 0.65);
 }
 
 .action-task {
@@ -129,5 +132,5 @@
 
 .date-task {
   align-self: flex-end;
-  font-size: 0.8rem;
+  font-size: calc(1vw + .4em);
 }

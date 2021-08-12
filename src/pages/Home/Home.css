@@ -2,8 +2,9 @@
   background-color: var(--very-dark-desaturated-blue);
   box-shadow: 0px 10px 15px rgb(12 14 19 / 60%);
   border-radius: 0 0 5px 5px;
-  display: flex;
   color: var(--dark-grayish-blue);
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
   transition: all .2s linear;
@@ -14,12 +15,18 @@
   box-shadow: 0px 8px 15px rgb(69 69 69 / 60%);
 }
 
-.App-content-actions span:hover:not(.App-content-actions > span:first-child) {
-  color: #FFF;
+.App-handle-select {
+  cursor: pointer;
+  padding-bottom: .5vh;
 }
 
-.App-content-actions.light span:hover:not(.App-content-actions > span:first-child) {
-  color: var(--very-dark-desaturated-blue)
+.select-all:hover {
+  color: rgba(255, 0, 0, 0.65);
+}
+
+.App-select-state-task span:hover {
+  color: #FFF;
+
 }
 
 .icon-mode {

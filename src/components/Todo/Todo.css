@@ -17,7 +17,6 @@
   transition: all .2s linear;
 }
 .empty-task {
-  /* border: 2px solid red; */
   background-color: var(--very-dark-desaturated-blue);
   border-bottom: 1px solid var(--very-dark-grayish-blue);
   color: var(--light-grayish-blue);
