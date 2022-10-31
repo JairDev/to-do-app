@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
+import { themeContext } from "../../context/themeContext";
 import Task from "../Task/Task";
 import "./Todo.css";
 
@@ -9,16 +10,33 @@ const Todo = ({
   handleClickComplete,
   handleDragStart,
   handleDrop,
-  handleDragEnd
+  handleDragEnd,
 }) => {
+  const { theme } = useContext(themeContext);
   const contentRef = useRef(null);
-  
-  if(!taskList.length) return <div className="empty-task">Agrega una tarea...</div>
+  const backgroundClass = theme.light
+    ? theme.themeColorLight
+    : theme.themeColorDark;
+
+  if (!taskList.length)
+    return (
+      <div
+        className="empty-task"
+        style={{
+          backgroundColor: backgroundClass,
+        }}
+      >
+        Agrega una tarea...
+      </div>
+    );
 
   return (
     <section
       ref={contentRef}
       className="App-todo-list"
+      style={{
+        backgroundColor: backgroundClass,
+      }}
     >
       {taskList
         .sort((a, b) => a.order - b.order)
@@ -33,8 +51,7 @@ const Todo = ({
             handleDrop={handleDrop}
             handleDragEnd={handleDragEnd}
           />
-        ))
-      }
+        ))}
     </section>
   );
 };

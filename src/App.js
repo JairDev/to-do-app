@@ -5,17 +5,23 @@ import Home from "./pages/Home/Home";
 import "./App.css";
 import image from "./assets/img/bg-desktop-dark.jpg";
 import { useEffect, useState } from "react";
+import { themeContext } from "./context/themeContext";
 
 function App() {
   const [favorite, setFavorite] = useSaveData("favorite");
   const [task, setTask] = useSaveData("task");
-  const [orderTask, setOrderTask] = useState(1)
-  const [dragId, setDragId] = useState()
+  const [orderTask, setOrderTask] = useState(1);
+  const [dragId, setDragId] = useState();
+  const [theme, setTheme] = useState({
+    themeColorLight: "hsl(0, 0%, 98%)",
+    themeColorDark: "hsl(235, 24%, 19%)",
+    light: false,
+  });
 
   useEffect(() => {
-    const lastElement = task[task.length - 1]
-    if(lastElement) setOrderTask(lastElement.order + 1)
-  }, [task])
+    const lastElement = task[task.length - 1];
+    if (lastElement) setOrderTask(lastElement.order + 1);
+  }, [task]);
 
   const handleSubmit = (e, refInput) => {
     const date = new Date();
@@ -29,12 +35,11 @@ function App() {
       edit: false,
       dateFormat: date.toLocaleString(),
       taskCreate: date.toISOString(),
-      order: orderTask
-
+      order: orderTask,
     };
     const arrTask = task.concat([taskObject]);
     setTask(arrTask);
-    setOrderTask(prev => prev += 1)
+    setOrderTask((prev) => (prev += 1));
     refInput.current.value = "";
 
     e.preventDefault();
@@ -53,7 +58,6 @@ function App() {
     const isFavorite = task.map((task) =>
       task.id === id ? { ...task, favorite: !task.favorite } : task
     );
-
 
     const pushFavorite = isFavorite.filter((task) =>
       task.favorite ? task : null
@@ -101,42 +105,49 @@ function App() {
     setTask(selectedFilter);
   };
 
-  //drag 
+  //drag
   const handleDragStart = (e) => {
-    e.target.style.opacity = "0.3"
-    setDragId(e.currentTarget.id)
-  }
+    e.target.style.opacity = "0.3";
+    setDragId(e.currentTarget.id);
+  };
 
   const handleDrop = (e) => {
-    const dragItem = task.find(task => task.text === dragId)
-    const dropItem = task.find(task => task.text === e.currentTarget.id)
-    
-    const dragItemOrder = dragItem.order
-    const dropItemOrder = dropItem.order
-    
-    const newTaskState = task.map(task => {
-      if(task.id === dragId) {
-        task.order = dropItemOrder
+    const dragItem = task.find((task) => task.text === dragId);
+    const dropItem = task.find((task) => task.text === e.currentTarget.id);
+
+    const dragItemOrder = dragItem.order;
+    const dropItemOrder = dropItem.order;
+
+    const newTaskState = task.map((task) => {
+      if (task.id === dragId) {
+        task.order = dropItemOrder;
       }
 
-      if(task.id === e.currentTarget.id) {
-        task.order = dragItemOrder
+      if (task.id === e.currentTarget.id) {
+        task.order = dragItemOrder;
       }
-      return task
-    })
-    setTask(newTaskState)
-  }
+      return task;
+    });
+    setTask(newTaskState);
+  };
 
   const handleDragEnd = (e) => {
-    console.log(e.target)
-    e.target.style.opacity = "1"
-  }
+    console.log(e.target);
+    e.target.style.opacity = "1";
+  };
 
   // end drag /////////////////////////////////
 
   return (
     <Router>
-      <div className="App">
+      <div
+        className="App"
+        style={{
+          backgroundColor: theme.light
+            ? theme.themeColorLight
+            : theme.themeColorDark,
+        }}
+      >
         <div className="App-content-image-hero">
           <img src={image} alt=""></img>
         </div>
@@ -161,21 +172,22 @@ function App() {
             />
           </Route>
           <Route path="/">
-            <Home
-              task={task}
-              handleSubmit={handleSubmit}
-              handleClickFavorite={handleClickFavorite}
-              handleClickDelete={handleClickDelete}
-              handleClickComplete={handleClickComplete}
-              handleSelectAllTask={handleSelectAllTask}
-              handleSelectCompletedTask={handleSelectCompletedTask}
-              handleSelectActiveTask={handleSelectActiveTask}
-              handleDeleteSelect={handleDeleteSelect}
-
-              handleDragStart={handleDragStart}
-              handleDrop={handleDrop}
-              handleDragEnd={handleDragEnd}
-            />
+            <themeContext.Provider value={{ theme, setTheme }}>
+              <Home
+                task={task}
+                handleSubmit={handleSubmit}
+                handleClickFavorite={handleClickFavorite}
+                handleClickDelete={handleClickDelete}
+                handleClickComplete={handleClickComplete}
+                handleSelectAllTask={handleSelectAllTask}
+                handleSelectCompletedTask={handleSelectCompletedTask}
+                handleSelectActiveTask={handleSelectActiveTask}
+                handleDeleteSelect={handleDeleteSelect}
+                handleDragStart={handleDragStart}
+                handleDrop={handleDrop}
+                handleDragEnd={handleDragEnd}
+              />
+            </themeContext.Provider>
           </Route>
         </Switch>
       </div>

@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import Todo from "../../components/Todo/Todo";
 import "./Home.css";
-import { changeMode } from "../../utils/changeThemeMode";
 import iconNight from "../../assets/img/icon-moon.svg";
+import iconDay from "../../assets/img/icon-sun.svg";
+import { themeContext } from "../../context/themeContext";
 
 const Home = ({
   task,
@@ -18,12 +19,17 @@ const Home = ({
   handleDrop,
   handleDragEnd,
 }) => {
+  const { theme, setTheme } = useContext(themeContext);
   const refInput = useRef(null);
-  let dark = true;
+  const backgroundClass = theme.light
+    ? theme.themeColorLight
+    : theme.themeColorDark;
 
   const handleMode = () => {
-    dark = !dark;
-    changeMode(dark);
+    setTheme({
+      ...theme,
+      light: !theme.light,
+    });
   };
 
   return (
@@ -35,12 +41,17 @@ const Home = ({
           </div>
 
           <div onClick={handleMode} className="icon-mode">
-            <img src={iconNight} alt=""></img>
+            <img src={theme.light ? iconDay : iconNight} alt=""></img>
           </div>
         </div>
         <main className="App-main">
           <section className="App-todo">
-            <div className="content-input-user-task">
+            <div
+              className="content-input-user-task"
+              style={{
+                backgroundColor: backgroundClass,
+              }}
+            >
               <form
                 className="form-user-input"
                 onSubmit={(e) => handleSubmit(e, refInput)}
@@ -65,7 +76,12 @@ const Home = ({
             />
           </section>
 
-          <div className="App-content-actions">
+          <div
+            className="App-content-actions"
+            style={{
+              backgroundColor: backgroundClass,
+            }}
+          >
             <div className="App-select-state-task">
               <span
                 onClick={handleSelectAllTask}

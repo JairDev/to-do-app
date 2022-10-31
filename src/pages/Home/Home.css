@@ -1,13 +1,13 @@
 .App-content-actions {
   background-color: var(--very-dark-desaturated-blue);
-  box-shadow: 0px 10px 15px rgb(12 14 19 / 60%);
+  box-shadow: 0px 10px 30px 10px rgb(12 14 19 / 15%);
   border-radius: 0 0 5px 5px;
   color: var(--dark-grayish-blue);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
-  transition: all .2s linear;
+  transition: all 0.2s linear;
 }
 
 .App-content-actions.light {
@@ -17,7 +17,7 @@
 
 .App-handle-select {
   cursor: pointer;
-  padding-bottom: .5vh;
+  padding-bottom: 0.5vh;
 }
 
 .select-all:hover {
@@ -25,10 +25,23 @@
 }
 
 .App-select-state-task span:hover {
-  color: #FFF;
-
+  color: #fff;
 }
 
 .icon-mode {
   cursor: pointer;
+}
+
+.content-input-user-task {
+  background-color: var(--very-dark-desaturated-blue);
+  border-radius: 5px;
+  box-shadow: 0px 8px 15px rgba(27, 33, 44, 0.6);
+  color: var(--very-light-gray);
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+  transition: all 0.2s linear;
+}
+
+.content-input-user-task input {
+  color: var(--very-light-gray);
 }
